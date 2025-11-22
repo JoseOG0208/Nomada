@@ -1,0 +1,1165 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nómada — Turismo sostenible (SPA)</title>
+  <meta name="description" content="Nómada: turismo sostenible personalizado. Catálogo responsable, calculadora de huella, reseñas y contacto." />
+  <style>
+    :root{ --bg:#0d1b0f; --card:#142418; --muted:#a7c7a4; --text:#e8f5e9; --brand:#4ade80; --brand-2:#22c55e; --ok:#16a34a; }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:linear-gradient(180deg,#0d1b0f,#122616 40%,#0d1b0f 100%);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+    a{color:var(--brand);text-decoration:none}
+    .container{max-width:1100px;margin:auto;padding:24px}
+    .nav{position:sticky;top:0;backdrop-filter:saturate(180%) blur(8px);background:rgba(13,27,15,.7);border-bottom:1px solid #1e3923;z-index:50}
+    .nav-inner{display:flex;justify-content:space-between;align-items:center;gap:16px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .logo{width:40px;height:40px;border-radius:50%;background:url('logo.png') center/cover no-repeat,conic-gradient(from 0deg,var(--brand),var(--brand-2));box-shadow:0 0 0 3px rgba(74,222,128,.3)}
+    .menu{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .link{padding:10px 12px;border-radius:10px}
+    .link.active{background:rgba(34,197,94,.15);border:1px solid #1e3923}
+    .btn{padding:10px 14px;border-radius:12px;border:1px solid #1e3923;background:#122616;color:var(--text);display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--brand),var(--brand-2));border:0;color:#0d1b0f;font-weight:700}
+    .hero{padding:48px 24px 24px}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+    .title{font-size:clamp(28px,4vw,44px);margin:0 0 12px}
+    .subtitle{color:var(--muted);margin:0 0 18px}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid #225c30;color:var(--brand);background:#132b18;margin-bottom:12px}
+    .section{padding:40px 24px}
+    .card{background:#142418;border:1px solid #1e3923;border-radius:16px;padding:18px}
+    .grid{display:grid;gap:18px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+    .pill{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid #1e3923;background:#142418;color:#c8f3c8;font-size:12px}
+    .footer{border-top:1px dashed #1e3923;color:#a7c7a4;text-align:center;padding:30px 24px}
+    .muted{color:var(--muted)}
+    .route{display:none}
+    .route.active{display:block}
+    .stars{font-size:14px;letter-spacing:1px}
+    .avatar{width:40px;height:40px;border-radius:999px;background:#124e22;display:grid;place-items:center;font-weight:700;color:#c8f3c8}
+    .step{
+      background:#122616;
+      border-radius:12px;
+      padding:8px 10px;
+      border:1px solid #1e3923;
+      font-size:14px;
+    }
+    @media(max-width:900px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid.cols-3{grid-template-columns:1fr}
+      .grid.cols-2{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV SPA -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand"><span class="logo"></span> Nómada</div>
+      <div class="menu">
+        <a class="link" href="#inicio" data-route>Inicio</a>
+        <a class="link" href="#catalogo" data-route>Catálogo</a>
+        <a class="link" href="#resenas" data-route>Reseñas</a>
+        <a class="link" href="#calculadora" data-route>Calculadora</a>
+        <a class="link" href="#planes" data-route>Planes</a>
+        <a class="link" href="#contacto" data-route>Contacto</a>
+        <a class="link" href="#login" data-route>Iniciar sesión</a>
+        <span id="userBadge" class="pill" style="display:none;cursor:pointer" title="Haz clic para ver tus reservas">Usuario</span>
+        <button id="logoutBtn" class="btn" style="display:none">Salir</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- RUTA: INICIO -->
+  <main id="inicio" class="route active">
+    <header class="hero container">
+      <div class="hero-grid">
+        <div>
+          <span class="tag">Turismo sostenible</span>
+          <h1 class="title">Planifica viajes responsables con recomendaciones <em>hechas a tu medida</em>.</h1>
+          <p class="subtitle"><em>"Viaja inteligente, viaja sostenible"</em></p>
+          <div class="cta" style="display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn primary" href="#catalogo">Explorar experiencias</a>
+            <a class="btn" href="#calculadora">Calcular huella</a>
+            <a class="btn" href="#planes">Ver planes</a>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80" style="width:100%;border-radius:12px" alt="Paisaje Nómada"/>
+        </div>
+      </div>
+    </header>
+
+    <section class="section container">
+      <h2>Funciones clave</h2>
+      <div class="grid cols-3" style="margin-top:14px">
+        <div class="card"><h3>Personalización por IA</h3><p>Itinerarios adaptados a tus intereses y presupuesto.</p></div>
+        <div class="card"><h3>Huella visible</h3><p>Calcula el impacto ambiental de cada decisión.</p></div>
+        <div class="card"><h3>Comunidad</h3><p>Comparte reseñas y gana insignias como viajero verde.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- RUTA: CATALOGO -->
+  <section id="catalogo" class="route container section">
+    <h2>Catálogo sostenible</h2>
+    <p class="muted">Explora experiencias responsables y hospedajes certificados.</p>
+
+    <div class="card" style="margin-top:10px">
+      <div class="grid cols-3" id="catalogGrid"></div>
+      <p id="catalogEmpty" style="display:none;text-align:center;color:#a7c7a4">No hay resultados.</p>
+    </div>
+  </section>
+
+  <!-- RUTA: RESEÑAS -->
+  <section id="resenas" class="route container section">
+    <h2>Reseñas de viajeros</h2>
+    <p class="muted">Experiencias reales de la comunidad Nómada. ¡Comparte la tuya y ayuda a otros a viajar mejor!</p>
+    <p id="reviewLockMsg" class="muted" style="margin-top:6px;display:none">
+      Debes iniciar sesión para publicar una reseña.
+    </p>
+
+    <div class="card" style="margin-top:10px">
+      <div class="grid cols-3" id="resenasGrid"></div>
+      <p id="resenasEmpty" style="display:none;text-align:center;color:#a7c7a4;margin:10px 0 0">Aún no hay reseñas.</p>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 style="margin:0 0 10px">Deja tu reseña</h3>
+      <form id="resenaForm" onsubmit="return false;">
+        <div class="grid cols-2">
+          <div>
+            <label>Tu nombre (se rellena con tu usuario)<br/>
+              <input id="rNombre" required placeholder="Tu nombre" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)">
+            </label>
+          </div>
+          <div>
+            <label>Actividad / hospedaje<br/>
+              <select id="rActividad" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)"></select>
+            </label>
+          </div>
+        </div>
+        <div class="grid cols-2" style="margin-top:10px">
+          <div>
+            <label>Calificación (1–5)<br/>
+              <select id="rRating" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)">
+                <option value="5">★★★★★ (5)</option>
+                <option value="4">★★★★☆ (4)</option>
+                <option value="3">★★★☆☆ (3)</option>
+                <option value="2">★★☆☆☆ (2)</option>
+                <option value="1">★☆☆☆☆ (1)</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label>Fecha<br/>
+              <input id="rFecha" placeholder="Nov 2025" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)">
+            </label>
+          </div>
+        </div>
+        <div style="margin-top:10px">
+          <label>Tu opinión<br/>
+            <textarea id="rTexto" required rows="4" placeholder="Cuenta lo mejor y lo que se puede mejorar…" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)"></textarea>
+          </label>
+        </div>
+        <div class="cta" style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+          <button id="rEnviar" class="btn primary" type="submit">Publicar reseña</button>
+          <button id="rLimpiar" class="btn" type="button">Limpiar</button>
+        </div>
+        <p id="rMsg" class="muted" style="margin-top:8px;display:none"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- RUTA: CALCULADORA -->
+  <section id="calculadora" class="route container section">
+    <h2>Calculadora de huella de carbono</h2>
+
+    <div class="grid cols-2" style="margin-top:10px;align-items:flex-start">
+      <!-- Explicación -->
+      <article class="card">
+        <h3 style="margin-top:0">¿Cómo funciona?</h3>
+        <p class="muted">
+          Esta calculadora estima la huella de carbono <strong>por persona</strong> de tu viaje,
+          a partir de tres componentes: <em>transporte</em>, <em>alojamiento</em> y <em>actividades</em>.
+        </p>
+        <ol style="padding-left:18px;margin:10px 0">
+          <li><strong>Transporte:</strong> elige el modo (avión, bus, carro, tren) y la distancia total en km. Marca “ida y vuelta” si aplica.</li>
+          <li><strong>Alojamiento:</strong> selecciona el tipo de hospedaje y cuántas noches te quedas.</li>
+          <li><strong>Actividades:</strong> define si tu viaje es de baja, media o alta intensidad y cuántos días de actividades tienes.</li>
+        </ol>
+        <p class="muted" style="margin:10px 0">
+          Con esos datos calculamos:
+        </p>
+        <ul style="padding-left:18px;margin:10px 0">
+          <li><strong>Huella total</strong> en kg CO₂e por persona.</li>
+          <li><strong>Desglose</strong> del impacto por transporte, alojamiento y actividades.</li>
+          <li><strong>Equivalencias</strong> aproximadas (km en carro y árboles necesarios para capturar esa cantidad en un año).</li>
+        </ul>
+        <p class="muted" style="font-size:13px;margin-top:12px">
+          Es una herramienta educativa para comparar escenarios y tomar decisiones más responsables. 
+          Los valores son aproximados y pueden variar según el operador y las condiciones reales del viaje.
+        </p>
+      </article>
+
+      <!-- Calculadora -->
+      <article class="card">
+        <div class="grid cols-3">
+          <!-- Transporte -->
+          <div>
+            <h3 style="margin-top:0">Transporte</h3>
+            <label>Modo
+              <select id="tm" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)">
+                <option value="avion">Avión</option>
+                <option value="bus">Bus</option>
+                <option value="carro">Carro</option>
+                <option value="tren">Tren</option>
+              </select>
+            </label>
+            <div style="margin-top:8px">
+              <label>Distancia total (km)
+                <input id="km" type="number" min="0" step="10" value="800" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)" />
+              </label>
+            </div>
+            <div style="margin-top:8px">
+              <label class="pill" style="display:inline-flex;gap:8px;align-items:center">
+                <input id="roundtrip" type="checkbox" checked> Ida y vuelta
+              </label>
+            </div>
+            <div id="occWrap" style="margin-top:8px;display:none">
+              <label>Personas en el carro
+                <input id="occ" type="number" min="1" value="1" step="1" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)" />
+              </label>
+            </div>
+          </div>
+
+          <!-- Alojamiento -->
+          <div>
+            <h3 style="margin-top:0">Alojamiento</h3>
+            <label>Tipo
+              <select id="lodge" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)">
+                <option value="hotel">Hotel</option>
+                <option value="hostal">Hostal</option>
+                <option value="airbnb">Apartamento/airbnb</option>
+                <option value="camping">Camping</option>
+              </select>
+            </label>
+            <div style="margin-top:8px">
+              <label>Noches
+                <input id="nights" type="number" min="0" step="1" value="3" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)" />
+              </label>
+            </div>
+          </div>
+
+          <!-- Actividades -->
+          <div>
+            <h3 style="margin-top:0">Actividades</h3>
+            <label>Nivel
+              <select id="actlvl" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)">
+                <option value="baja">Baja (caminatas, museos)</option>
+                <option value="media">Media (tours, botes, atracciones)</option>
+                <option value="alta">Alta (deportes, motor, vuelos locales)</option>
+              </select>
+            </label>
+            <div style="margin-top:8px">
+              <label>Días
+                <input id="days" type="number" min="0" step="1" value="3" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)" />
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta" style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+          <button id="resetBtn" class="btn" type="button">Limpiar</button>
+        </div>
+
+        <div id="calcOut" class="card" style="margin-top:12px">
+          <h3 style="margin:6px 0">Resultado</h3>
+          <p id="totalLine" style="font-weight:700;margin:0"></p>
+          <ul id="breakdown" style="margin:8px 0 10px 18px"></ul>
+          <p id="equivs" class="muted" style="margin:0"></p>
+          <div id="tips" class="grid cols-2" style="margin-top:10px"></div>
+        </div>
+
+        <!-- Bloque solo Premium -->
+        <div class="card premium-only" style="margin-top:12px">
+          <h3 style="margin:6px 0">Itinerario avanzado (Premium)</h3>
+          <p class="muted" style="margin:0 0 6px">
+            Como usuario Premium puedes simular un itinerario avanzado con reparto de huella por día,
+            recomendaciones optimizadas y alertas de alto impacto.
+          </p>
+          <button class="btn" type="button" onclick="alert('Función Premium simulada: aquí podrías generar un itinerario avanzado con IA.');">
+            Generar itinerario avanzado
+          </button>
+        </div>
+      </article>
+    </div>
+
+    <p class="muted" style="margin-top:10px">
+      Factores de emisión por persona (aprox): avión 0,15; bus 0,03; carro 0,12; tren 0,04 kg CO₂e/km.
+      Hospedaje por noche: hotel 15; hostal 6; airbnb 10; camping 1.
+      Actividades por día: baja 1; media 5; alta 12.
+    </p>
+  </section>
+
+  <!-- RUTA: PLANES (modelo freemium) -->
+  <section id="planes" class="route container section">
+    <h2>Planes Nómada (Freemium)</h2>
+    <p class="muted">
+      Nómada se basa en un modelo <strong>freemium</strong>: puedes usar gratis el catálogo y las reseñas,
+      y si necesitas más, activas la versión <strong>Premium</strong> con suscripción mensual .
+    </p>
+
+    <div class="grid cols-2" style="margin-top:14px">
+      <article class="card">
+        <h3 style="margin-top:0">Plan Gratis</h3>
+        <p class="muted">Perfecto para explorar y conocer el enfoque de turismo sostenible.</p>
+        <ul style="margin:8px 0 0 18px">
+          <li>Exploración completa del catálogo de experiencias.</li>
+          <li>Consulta de reseñas de otros viajeros.</li>
+          <li>Calculadora básica de huella de carbono.</li>
+          <li>Reservas simuladas de actividades y hospedajes.</li>
+        </ul>
+        <p style="margin-top:10px"><strong>$0 / mes</strong></p>
+      </article>
+
+      <article class="card">
+        <h3 style="margin-top:0">Plan Premium</h3>
+        <p class="muted">Para quienes quieren llevar su viaje sostenible al siguiente nivel.</p>
+        <ul style="margin:8px 0 0 18px">
+          <li>Itinerarios avanzados y personalizados.</li>
+          <li>Asistencia personalizada para ajustar tu ruta según tu huella.</li>
+          <li>Herramientas ampliadas: módulos avanzados en la calculadora y recomendaciones extra.</li>
+          <li>Distintivo Premium en tu perfil dentro de la plataforma.</li>
+        </ul>
+        <p style="margin-top:10px"><strong>$29.000 / mes</strong> <span class="muted"> </span></p>
+
+        <div class="cta" style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+          <button id="upgradeBtn" class="btn primary" type="button">Activar Premium (simulado)</button>
+        </div>
+        <p id="upgradeMsg" class="muted" style="margin-top:8px;display:none"></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- RUTA: CONTACTO -->
+  <section id="contacto" class="route container section">
+    <h2>Contacto</h2>
+    <div class="card">
+      <form onsubmit="event.preventDefault();alert('Gracias por participar');this.reset();">
+        <div class="grid cols-2">
+          <input placeholder="Nombre" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)">
+          <input type="email" placeholder="Correo" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)">
+        </div>
+        <textarea placeholder="Mensaje" style="margin-top:8px;width:100%;height:100px;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)"></textarea>
+        <div style="margin-top:10px"><button class="btn primary">Enviar</button></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- RUTA: LOGIN -->
+  <section id="login" class="route container section">
+    <h2>Iniciar sesión</h2>
+    <div class="card">
+      <form id="loginForm" onsubmit="return false;">
+        <div class="grid cols-2">
+          <div>
+            <label>Correo electrónico<br/>
+              <input id="lEmail" type="email" required placeholder="tu@email.com" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)">
+            </label>
+          </div>
+          <div>
+            <label>Contraseña<br/>
+              <input id="lPass" type="password" required placeholder="••••" minlength="4" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)">
+            </label>
+          </div>
+        </div>
+        <div style="margin-top:10px">
+          <label>Nombre (opcional, para mostrar en la barra)<br/>
+            <input id="lName" placeholder="Tu nombre" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)">
+          </label>
+        </div>
+        <div style="margin-top:10px">
+          <label style="display:inline-flex;align-items:center;gap:6px">
+            <input id="lIsSignup" type="checkbox">
+            Crear cuenta nueva
+          </label>
+        </div>
+        <div class="cta" style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn primary" type="submit">Entrar</button>
+          <a class="btn" href="#inicio">Cancelar</a>
+        </div>
+        <p id="lMsg" class="muted" style="margin-top:8px;display:none"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Modal catálogo -->
+  <div id="modal" style="position:fixed;inset:0;display:none;align-items:flex-start;justify-content:center;background:rgba(0,0,0,.5);padding:24px;z-index:1000">
+    <div id="modalCard" class="card" style="max-width:800px;width:100%;position:relative">
+      <button id="modalClose" class="btn" style="position:absolute;top:10px;right:10px">Cerrar</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- Modal reservas -->
+  <div id="reservasModal" style="position:fixed;inset:0;display:none;align-items:flex-start;justify-content:center;background:rgba(0,0,0,.5);padding:24px;z-index:1000">
+    <div class="card" style="max-width:700px;width:100%;position:relative">
+      <button id="reservasClose" class="btn" style="position:absolute;top:10px;right:10px">Cerrar</button>
+      <h2 style="margin-top:0">Mis reservas</h2>
+      <p id="reservasMsg" class="muted" style="margin-top:4px"></p>
+      <div id="reservasList" class="grid cols-2" style="margin-top:10px"></div>
+    </div>
+  </div>
+
+  <!-- Modal formulario de reserva -->
+  <div id="reservaFormModal" style="position:fixed;inset:0;display:none;align-items:flex-start;justify-content:center;background:rgba(0,0,0,.5);padding:24px;z-index:1100">
+    <div class="card" style="max-width:500px;width:100%;position:relative">
+      <button id="reservaFormClose" class="btn" style="position:absolute;top:10px;right:10px" type="button">Cerrar</button>
+      <h2 style="margin-top:0">Reservar experiencia</h2>
+      <p id="reservaFormTitle" class="muted" style="margin-top:4px"></p>
+      <form id="reservaForm" onsubmit="return false;" style="margin-top:10px">
+        <div style="margin-bottom:10px">
+          <label>Fecha del viaje<br/>
+            <input id="reservaFechaViaje" type="date" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)"/>
+          </label>
+        </div>
+        <div style="margin-bottom:10px">
+          <label>Número de personas<br/>
+            <input id="reservaPersonas" type="number" min="1" value="1" style="width:100%;padding:10px;border-radius:8px;border:1px solid #1e3923;background:#142418;color:var(--text)"/>
+          </label>
+        </div>
+        <div class="cta" style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn primary" type="button" onclick="guardarReserva()">Confirmar reserva</button>
+          <button class="btn" type="button" onclick="closeReservaForm()">Cancelar</button>
+        </div>
+        <p id="reservaFormMsg" class="muted" style="margin-top:8px;display:none"></p>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">Nómada — Proyecto académico • PUJ Bogotá</footer>
+
+  <script>
+    // Router
+    const routes = ['inicio','catalogo','resenas','calculadora','planes','contacto','login'];
+    function setActiveLink(hash){
+      document.querySelectorAll('[data-route]').forEach(a=>a.classList.remove('active'));
+      const link = document.querySelector(`[href="${hash}"]`);
+      if(link) link.classList.add('active');
+    }
+    function router(){
+      const hash = location.hash || '#inicio';
+      routes.forEach(id=>{
+        const el = document.getElementById(id);
+        if(el){ el.classList.toggle('active', `#${id}`===hash); }
+      });
+      setActiveLink(hash);
+      window.scrollTo({top:0,behavior:'auto'});
+    }
+    window.addEventListener('hashchange', router);
+    window.addEventListener('DOMContentLoaded', router);
+
+    // Auth + modelo freemium
+    const USER_KEY='nomada_user';
+    const USERS_KEY='nomada_users';
+
+    function getUser(){
+      try{
+        const raw = localStorage.getItem(USER_KEY);
+        return raw ? JSON.parse(raw) : null;
+      }catch{
+        return null;
+      }
+    }
+    function setUser(u){ localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+    function clearUser(){ localStorage.removeItem(USER_KEY); }
+    function getUsers(){
+      try{
+        const raw = localStorage.getItem(USERS_KEY);
+        return raw ? JSON.parse(raw) : [];
+      }catch{
+        return [];
+      }
+    }
+    function saveUsers(users){
+      localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    }
+
+    function updateAuthUI(){
+      const user=getUser();
+      const badge=document.getElementById('userBadge');
+      const logout=document.getElementById('logoutBtn');
+      const loginLink=document.querySelector('[href="#login"]');
+      if(user){
+        const isPremium = !!user.isPremium;
+        if(badge){ 
+          const baseName = (user.name && user.name.trim()) || user.email;
+          badge.style.display='inline-block'; 
+          badge.textContent = baseName + (isPremium ? ' ⭐' : '');
+          badge.title = isPremium ? 'Cuenta Premium — haz clic para ver tus reservas' : 'Haz clic para ver tus reservas'; 
+        }
+        if(logout){ logout.style.display='inline-flex'; }
+        if(loginLink){ loginLink.style.display='none'; }
+      }else{
+        if(badge){ badge.style.display='none'; badge.title=''; }
+        if(logout){ logout.style.display='none'; }
+        if(loginLink){ loginLink.style.display=''; }
+      }
+    }
+
+    function updateReviewFormState(){
+      const user = getUser();
+      const isLogged = !!user;
+      const lockMsg = document.getElementById('reviewLockMsg');
+      const nameInput = document.getElementById('rNombre');
+      const sendBtn = document.getElementById('rEnviar');
+
+      if(lockMsg){
+        lockMsg.style.display = isLogged ? 'none' : 'block';
+      }
+      if(sendBtn){
+        sendBtn.disabled = !isLogged;
+        sendBtn.title = isLogged ? '' : 'Inicia sesión para publicar una reseña';
+      }
+      if(nameInput){
+        if(isLogged){
+          nameInput.value = (user.name && user.name.trim()) || user.email;
+          nameInput.readOnly = true;
+        }else{
+          nameInput.value = '';
+          nameInput.readOnly = false;
+        }
+      }
+    }
+
+    function updatePremiumUI(){
+      const user = getUser();
+      const isPremium = !!(user && user.isPremium);
+
+      // Mostrar/ocultar bloques solo Premium
+      document.querySelectorAll('.premium-only').forEach(el=>{
+        el.style.display = isPremium ? '' : 'none';
+      });
+
+      // Configurar UI del botón de upgrade
+      const upBtn = document.getElementById('upgradeBtn');
+      const upMsg = document.getElementById('upgradeMsg');
+      if(!upBtn || !upMsg) return;
+
+      upMsg.style.display='block';
+      if(!user){
+        upBtn.disabled = true;
+        upBtn.textContent = 'Inicia sesión para ser Premium';
+        upMsg.textContent = 'Crea una cuenta gratuita y luego activa tu plan Premium.';
+      }else if(isPremium){
+        upBtn.disabled = true;
+        upBtn.textContent = 'Ya eres Premium';
+        upMsg.textContent = 'Disfruta de tus beneficios Premium dentro de la plataforma.';
+      }else{
+        upBtn.disabled = false;
+        upBtn.textContent = 'Activar Premium (simulado)';
+        upMsg.textContent = 'En este prototipo, activar Premium es solo un cambio de estado local, sin pagos reales.';
+      }
+    }
+
+    function handleUpgradeToPremium(){
+      const user = getUser();
+      if(!user){
+        alert('Primero inicia sesión para activar Premium.');
+        location.hash='#login';
+        return;
+      }
+      if(user.isPremium){
+        alert('Ya tienes Premium activo.');
+        return;
+      }
+      const users = getUsers();
+      const idx = users.findIndex(u=>u.email===user.email);
+      if(idx>=0){
+        users[idx].isPremium = true;
+        saveUsers(users);
+      }
+      const updated = {...user, isPremium:true};
+      setUser(updated);
+      updateAuthUI();
+      updatePremiumUI();
+      const msg = document.getElementById('upgradeMsg');
+      if(msg){
+        msg.textContent = 'Listo 🚀 Tu cuenta ahora es Premium (simulado).';
+        msg.style.display='block';
+      }
+      alert('Tu cuenta ahora está marcada como Premium en este prototipo.');
+    }
+
+    window.addEventListener('DOMContentLoaded',()=>{
+      updateAuthUI();
+      updateReviewFormState();
+      updatePremiumUI();
+
+      document.getElementById('logoutBtn')?.addEventListener('click',()=>{ 
+        clearUser(); 
+        updateAuthUI(); 
+        updateReviewFormState();
+        updatePremiumUI();
+        closeReservasModal();
+        closeReservaForm();
+        location.hash='#inicio'; 
+      });
+
+      const f=document.getElementById('loginForm');
+      if(f){
+        f.addEventListener('submit',(e)=>{
+          e.preventDefault();
+          const email=document.getElementById('lEmail').value.trim();
+          const pass=document.getElementById('lPass').value.trim();
+          const name=document.getElementById('lName').value.trim();
+          const isSignup=document.getElementById('lIsSignup').checked;
+          const msg=document.getElementById('lMsg');
+
+          if(!email.includes('@') || pass.length<4){
+            msg.textContent='Usa un correo válido y una clave de mínimo 4 caracteres.'; 
+            msg.style.display='block'; 
+            return;
+          }
+
+          const users = getUsers();
+          let loggedUser = null;
+
+          if(isSignup){
+            const existing = users.find(u=>u.email===email);
+            if(existing){
+              msg.textContent='Ya existe una cuenta con este correo.';
+              msg.style.display='block';
+              return;
+            }
+            const newUser = {email, pass, name, isPremium:false};
+            users.push(newUser);
+            saveUsers(users);
+            loggedUser = newUser;
+            msg.textContent='Cuenta creada correctamente. Sesión iniciada.';
+          }else{
+            const existing = users.find(u=>u.email===email);
+            if(!existing || existing.pass !== pass){
+              msg.textContent='Correo o contraseña incorrectos.';
+              msg.style.display='block';
+              return;
+            }
+            loggedUser = existing;
+            msg.textContent='Sesión iniciada correctamente.';
+          }
+
+          // Actualizar nombre (si el usuario escribe uno nuevo)
+          let displayName = name || loggedUser.name || '';
+          loggedUser.name = displayName;
+
+          // Guardar cambios en la lista de usuarios
+          const all = getUsers();
+          const index = all.findIndex(u=>u.email===loggedUser.email);
+          if(index>=0){
+            all[index] = loggedUser;
+            saveUsers(all);
+          }
+
+          msg.style.display='block';
+
+          setUser({email: loggedUser.email, name: displayName, isPremium: !!loggedUser.isPremium});
+          updateAuthUI();
+          updateReviewFormState();
+          updatePremiumUI();
+          location.hash='#inicio';
+        });
+      }
+
+      // Badge -> Mis reservas
+      document.getElementById('userBadge')?.addEventListener('click', openReservasModal);
+      // Upgrade button
+      document.getElementById('upgradeBtn')?.addEventListener('click', handleUpgradeToPremium);
+    });
+
+    // Catálogo
+    const catalogo = [
+      {titulo:'Caminata al páramo de Sumapaz', tipo:'Naturaleza', destino:'Bogotá – Sumapaz', precio:'$90.000', img:'download.jpeg',
+       descripcion:'Sendero interpretativo por el páramo más grande del mundo, guiado por comunidad local.', duracion:'6–7 horas', dificultad:'Media',
+       certificados:['Guía local','Bajo impacto'], operador:'Colectivo Sumapaz', cupos:12,
+       incluye:['Guía certificado','Seguro básico','Refrigerio'], noIncluye:['Transporte hasta punto de inicio','Almuerzo'],
+       recomendaciones:['Chaqueta impermeable','Botas de agarre','Bloqueador solar'],
+      },
+      {titulo:'Parque Tayrona – Cabo San Juan', tipo:'Naturaleza', destino:'Santa Marta', precio:'$35.000', img:'parque_tayrona.jpg',
+       descripcion:'Caminata costera entre selva y playa hasta Cabo San Juan, con paradas de interpretación ambiental.', duracion:'4–5 horas', dificultad:'Baja–Media',
+       certificados:['Operador local'], operador:'Tayrona Verde', cupos:20,
+       incluye:['Ingreso guiado','Guía ambiental','Puntos de hidratación'], noIncluye:['Entrada al Parque','Almuerzo'],
+       recomendaciones:['Hidratación','Sombrero','Ropa ligera'],
+      },
+      {titulo:'Dunas de la Guajira (eco-ruta 4x4)', tipo:'Aventura', destino:'La Guajira', precio:'$240.000', img:'Taroa.jpg',
+       descripcion:'Recorrido por desierto y dunas con paradas culturales Wayuu y manejo responsable en 4x4.', duracion:'8 horas', dificultad:'Media',
+       certificados:['Impacto controlado'], operador:'Wayuu Tours', cupos:10,
+       incluye:['Transporte 4x4 compartido','Guía local','Seguro'], noIncluye:['Comidas'],
+       recomendaciones:['Gafas de sol','Paliacate','Protector solar'],
+      },
+      {titulo:'Valle de Cocora y bosque de niebla', tipo:'Naturaleza', destino:'Quindío', precio:'$120.000', img:'cocora.jpg',
+       descripcion:'Ascenso suave entre palmas de cera y bosque nublado con interpretación de flora endémica.', duracion:'5 horas', dificultad:'Baja–Media',
+       certificados:['Guía certificado'], operador:'Cafetal Travel', cupos:15,
+       incluye:['Guía','Seguro','Entrada'], noIncluye:['Transporte'],
+       recomendaciones:['Capa de lluvia','Calzado cómodo'],
+      },
+      {titulo:'Caño Cristales: caminata guiada', tipo:'Naturaleza', destino:'Meta – La Macarena', precio:'$380.000', img:'cristales.jpg',
+       descripcion:'Senderos sobre roca y pozos naturales para ver la macarenia clavigera en temporada.', duracion:'6 horas', dificultad:'Media',
+       certificados:['Operador autorizado PN'], operador:'Macarena Tours', cupos:12,
+       incluye:['Guía','Seguro','Permisos'], noIncluye:['Vuelos','Alimentación'],
+       recomendaciones:['Aqua shoes','Sombrero','Hidratación'],
+      },
+      {titulo:'Safari llanero sostenible', tipo:'Aventura', destino:'Casanare', precio:'$450.000', img:'safari.jpeg',
+       descripcion:'Observación de fauna (chigüiros, aves, caimanes) en hatos con buenas prácticas de conservación.', duracion:'1 día', dificultad:'Baja',
+       certificados:['Operador comunitario'], operador:'Hato Vivo', cupos:14,
+       incluye:['Transporte interno','Guía','Almuerzo'], noIncluye:['Traslados intermunicipales'],
+       recomendaciones:['Lentes binoculares','Repelente'],
+      },
+      {titulo:'Ruta del café de origen', tipo:'Cultura', destino:'Huila – San Agustín', precio:'$110.000', img:'cafe.jpeg',
+       descripcion:'Tour por finca sostenible: cultivo, beneficio y cata básica de café especial.', duracion:'4 horas', dificultad:'Baja',
+       certificados:['Productor local'], operador:'Finca La Montaña', cupos:18,
+       incluye:['Cata','Recorrido','Seguro'], noIncluye:['Transporte'],
+       recomendaciones:['Zapatos cerrados','Gorra'],
+      },
+      {titulo:'City tour en bicicleta', tipo:'Cultura', destino:'Bogotá', precio:'$60.000', img:'bicicletas.jpg',
+       descripcion:'Recorrido por ciclovías y murales con pausas de historia y gastronomía.', duracion:'3 horas', dificultad:'Baja',
+       certificados:['Bici-amigable'], operador:'BiciArte', cupos:20,
+       incluye:['Bici y casco','Guía','Seguro'], noIncluye:['Comidas'],
+       recomendaciones:['Corta viento','Guantes ligeros'],
+      },
+      {titulo:'Kayak en manglar con guía local', tipo:'Aventura', destino:'Nariño – Tumaco', precio:'$150.000', img:'kayak.jpg',
+       descripcion:'Remada tranquila por canales de manglar con avistamiento de aves.', duracion:'2–3 horas', dificultad:'Baja',
+       certificados:['Operador comunitario'], operador:'Manglar Vivo', cupos:10,
+       incluye:['Kayak y chaleco','Guía','Seguro'], noIncluye:['Transporte'],
+       recomendaciones:['Ropa que se pueda mojar','Toalla'],
+      },
+      {titulo:'Avistamiento de ballenas', tipo:'Naturaleza', destino:'Chocó – Nuquí', precio:'$320.000', img:'ballenas.jpg',
+       descripcion:'Salida responsable en temporada con protocolos de distancia a cetáceos.', duracion:'3–4 horas', dificultad:'Baja',
+       certificados:['Impacto controlado'], operador:'Pacífico Azul', cupos:12,
+       incluye:['Lancha','Guía','Seguro'], noIncluye:['Tasa portuaria'],
+       recomendaciones:['Pastillas mareo','Impermeable ligero'],
+      },
+      {titulo:'Hostal ecológico en Jardín', tipo:'Hospedaje', destino:'Antioquia – Jardín', precio:'$95.000/noche', img:'hostal.jpg',
+       descripcion:'Alojamiento con energía solar y manejo de residuos, cerca del centro histórico.', duracion:'1+ noches', dificultad:'—',
+       certificados:['Prácticas de ahorro'], operador:'Hostal Andino', cupos:6,
+       incluye:['Habitación','Desayuno','Wi-Fi'], noIncluye:['Tours'],
+       recomendaciones:['Reservar con tiempo en temporada'],
+      },
+      {titulo:'Ecolodge en la Amazonia', tipo:'Hospedaje', destino:'Leticia', precio:'$280.000/noche', img:'ecolodge.jpg',
+       descripcion:'Cabañas sobre pilotes con senderos y guías indígenas disponibles.', duracion:'2–3 noches', dificultad:'—',
+       certificados:['Operador local'], operador:'Selva Viva', cupos:10,
+       incluye:['Alojamiento','Guía nocturna básica'], noIncluye:['Vuelos','Comidas'],
+       recomendaciones:['Vacuna fiebre amarilla','Repelente fuerte'],
+      },
+    ];
+
+    function renderCatalog(){
+      const grid = document.getElementById('catalogGrid');
+      const empty = document.getElementById('catalogEmpty');
+      if(!grid) return;
+      grid.innerHTML = '';
+      catalogo.forEach((it,i)=>{
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${it.img}" alt="${it.titulo}" style="width:100%;height:180px;object-fit:cover;border-radius:8px">
+          <div style="margin-top:10px">
+            <span class="pill">${it.tipo}</span>
+            <h3 style="margin:6px 0 4px">${it.titulo}</h3>
+            <p class="muted" style="margin:0">${it.destino}</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;gap:8px">
+              <strong>${it.precio}</strong>
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <button class="btn" data-more="${i}" type="button">Más información</button>
+                <button class="btn primary" data-reserva="${i}" type="button">Reservar</button>
+              </div>
+            </div>
+          </div>`;
+        grid.appendChild(card);
+      });
+      setTimeout(()=>{
+        document.querySelectorAll('[data-more]').forEach(btn=>{
+          btn.addEventListener('click',()=>{
+            const idx = +btn.getAttribute('data-more');
+            openModal(idx);
+          });
+        });
+        document.querySelectorAll('[data-reserva]').forEach(btn=>{
+          btn.addEventListener('click',()=>{
+            const idx = +btn.getAttribute('data-reserva');
+            reservar(idx);
+          });
+        });
+      },0);
+      if(empty) empty.style.display = catalogo.length ? 'none' : 'block';
+    }
+    window.addEventListener('DOMContentLoaded', renderCatalog);
+
+    function openModal(idx){
+      const m = document.getElementById('modal');
+      const c = document.getElementById('modalContent');
+      const it = catalogo[idx];
+      if(!m||!c||!it) return;
+      const noIncluye = Array.isArray(it.noIncluye) ? it.noIncluye : [];
+      c.innerHTML = `
+        <img src="${it.img}" alt="${it.titulo}" style="width:100%;height:260px;object-fit:cover;border-radius:10px">
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px">
+          <span class="pill">${it.tipo}</span>
+          ${(it.certificados||[]).map(x=>`<span class="pill">${x}</span>`).join(' ')}
+        </div>
+        <h2 style="margin:10px 0 6px">${it.titulo}</h2>
+        <p class="muted" style="margin:0 0 10px">${it.destino} • Operador: <strong>${it.operador||'N/A'}</strong> • Cupos: ${it.cupos||'—'}</p>
+        <p>${it.descripcion||''}</p>
+        <div class="grid cols-2" style="margin-top:10px">
+          <div class="card"><strong>Duración:</strong> ${it.duracion||'—'}<br><strong>Dificultad:</strong> ${it.dificultad||'—'}<br><strong>Precio:</strong> ${it.precio}</div>
+          <div class="card"><strong>Incluye:</strong><ul style="margin:6px 0 0 18px">${(it.incluye||[]).map(x=>`<li>${x}</li>`).join('')}</ul></div>
+        </div>
+        <div class="card" style="margin-top:10px"><strong>No incluye:</strong><ul style="margin:6px 0 0 18px">${noIncluye.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+        <div class="card" style="margin-top:10px"><strong>Recomendaciones:</strong><ul style="margin:6px 0 0 18px">${(it.recomendaciones||[]).map(x=>`<li>${x}</li>`).join('')}</ul></div>
+        <div class="cta" style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn primary" type="button" onclick="reservar(${idx})">Reservar esta experiencia</button>
+        </div>
+      `;
+      m.style.display='flex';
+    }
+    function closeModal(){ document.getElementById('modal').style.display='none'; }
+    window.addEventListener('DOMContentLoaded',()=>{
+      document.getElementById('modal')?.addEventListener('click',e=>{ if(e.target.id==='modal') closeModal(); });
+      document.getElementById('modalClose')?.addEventListener('click', closeModal);
+    });
+
+    // Reseñas
+    const resenas = [
+      { nombre:'Mariana R.', actividad:'Caminata al páramo de Sumapaz', rating:5, fecha:'Oct 2025', texto:'La guía local fue increíble y el grupo pequeño. Compromiso real con el páramo.' },
+      { nombre:'Carlos S.', actividad:'City tour en bicicleta — Bogotá', rating:4, fecha:'Sep 2025', texto:'Ruta completa y segura. Los murales están brutales. Mejoraría el punto de encuentro.' },
+      { nombre:'Laura G.', actividad:'Ecolodge en la Amazonia — Leticia', rating:5, fecha:'Ago 2025', texto:'Caminatas nocturnas con guía indígena y manejo de residuos excelente. Volvería sin duda.' }
+    ];
+    const LS_KEY='resenas_nomada';
+    function getResenasLS(){ try{ return JSON.parse(localStorage.getItem(LS_KEY))||[]; }catch{ return []; } }
+    function saveResenaLS(r){ const arr=getResenasLS(); arr.unshift(r); localStorage.setItem(LS_KEY, JSON.stringify(arr)); }
+    function inic(n){ return (n||'?').trim().split(/\s+/).map(p=>p[0]).slice(0,2).join('').toUpperCase(); }
+    function estrellas(n){
+      const full = '★'.repeat(Math.max(0,Math.min(5,Math.floor(n||0))));
+      const empty = '☆'.repeat(5 - full.length);
+      return `<span class="stars" aria-label="Puntuación: ${n} de 5">${full}${empty}</span>`;
+    }
+    function renderResenas(){
+      const grid = document.getElementById('resenasGrid');
+      const empty = document.getElementById('resenasEmpty');
+      if(!grid) return;
+      grid.innerHTML = '';
+      const mezcla = [...getResenasLS(), ...resenas];
+      mezcla.forEach(r=>{
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
+            <div class="avatar">${inic(r.nombre)}</div>
+            <div>
+              <strong>${r.nombre}</strong><br>
+              <span class="muted">${r.actividad} • ${r.fecha||''}</span>
+            </div>
+          </div>
+          <div style="margin-bottom:8px">${estrellas(r.rating)}</div>
+          <p style="margin:0">${r.texto}</p>
+        `;
+        grid.appendChild(card);
+      });
+      if(empty) empty.style.display = mezcla.length? 'none':'block';
+    }
+
+    function populateActividadSelect(){
+      const sel = document.getElementById('rActividad');
+      if (!sel) return;
+      sel.innerHTML =
+        '<option value="" disabled selected>Selecciona…</option>' +
+        catalogo.map(c => `<option value="${c.titulo}">${c.titulo}</option>`).join('');
+    }
+
+    window.addEventListener('DOMContentLoaded', ()=>{
+      renderResenas();
+      populateActividadSelect();
+      updateReviewFormState();
+
+      const f = document.getElementById('resenaForm');
+      const msg = document.getElementById('rMsg');
+
+      document.getElementById('rLimpiar')?.addEventListener('click', ()=>{ 
+        f.reset(); 
+        msg.style.display='none'; 
+        updateReviewFormState(); 
+      });
+
+      document.getElementById('rEnviar')?.addEventListener('click', ()=>{
+        const currentUser = getUser();
+        if(!currentUser){
+          msg.textContent = 'Debes iniciar sesión para publicar una reseña.';
+          msg.style.display='block';
+          return;
+        }
+
+        const nombre = (currentUser.name && currentUser.name.trim()) || currentUser.email;
+        const actividad = document.getElementById('rActividad').value;
+        const rating = Number(document.getElementById('rRating').value);
+        const fecha = (document.getElementById('rFecha').value.trim()) || new Date().toLocaleDateString('es-CO',{month:'short', year:'numeric'});
+        const texto = document.getElementById('rTexto').value.trim();
+
+        if(!actividad || !rating || !texto){
+          msg.textContent = 'Completa los campos requeridos.';
+          msg.style.display='block';
+          return;
+        }
+
+        saveResenaLS({nombre, actividad, rating, fecha, texto});
+        renderResenas();
+        f.reset();
+        updateReviewFormState();
+        msg.textContent = '¡Gracias! Tu reseña fue publicada en este dispositivo.';
+        msg.style.display='block';
+      });
+    });
+
+    // Reservas (per-user)
+    const RES_KEY_PREFIX='nomada_reservas_';
+    let reservaIdxActual = null;
+
+    function getReservasForUser(email){
+      try{
+        return JSON.parse(localStorage.getItem(RES_KEY_PREFIX+email))||[];
+      }catch{
+        return [];
+      }
+    }
+
+    function saveReservasForUser(email, arr){
+      localStorage.setItem(RES_KEY_PREFIX+email, JSON.stringify(arr));
+    }
+
+    // Paso 1: iniciar reserva -> abre formulario
+    function reservar(idx){
+      const user = getUser();
+      if(!user){
+        alert('Debes iniciar sesión para reservar.');
+        location.hash='#login';
+        return;
+      }
+      const it = catalogo[idx];
+      if(!it) return;
+
+      reservaIdxActual = idx;
+
+      const titleEl = document.getElementById('reservaFormTitle');
+      const fechaEl = document.getElementById('reservaFechaViaje');
+      const personasEl = document.getElementById('reservaPersonas');
+      const msgEl = document.getElementById('reservaFormMsg');
+
+      if(titleEl) titleEl.textContent = `${it.titulo} • ${it.destino}`;
+      if(fechaEl) fechaEl.value = '';
+      if(personasEl) personasEl.value = 1;
+      if(msgEl){ msgEl.style.display='none'; msgEl.textContent=''; }
+
+      document.getElementById('reservaFormModal').style.display='flex';
+    }
+
+    function closeReservaForm(){
+      const m = document.getElementById('reservaFormModal');
+      if(m) m.style.display='none';
+      reservaIdxActual = null;
+    }
+
+    // Paso 2: confirmar y guardar reserva
+    function guardarReserva(){
+      const user = getUser();
+      const msgEl = document.getElementById('reservaFormMsg');
+      if(!user){
+        if(msgEl){
+          msgEl.textContent='Debes iniciar sesión para reservar.';
+          msgEl.style.display='block';
+        }
+        return;
+      }
+      if(reservaIdxActual===null){
+        if(msgEl){
+          msgEl.textContent='No se encontró la experiencia a reservar.';
+          msgEl.style.display='block';
+        }
+        return;
+      }
+      const it = catalogo[reservaIdxActual];
+      if(!it){
+        if(msgEl){
+          msgEl.textContent='Experiencia no válida.';
+          msgEl.style.display='block';
+        }
+        return;
+      }
+
+      const fechaViaje = document.getElementById('reservaFechaViaje').value;
+      const personas = Number(document.getElementById('reservaPersonas').value || 1);
+
+      if(!fechaViaje || personas<1){
+        if(msgEl){
+          msgEl.textContent='Ingresa una fecha válida y al menos 1 persona.';
+          msgEl.style.display='block';
+        }
+        return;
+      }
+
+      const fechaReserva = new Date().toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'});
+      const email = user.email;
+      const actuales = getReservasForUser(email);
+
+      const reserva = {
+        id: Date.now().toString(),
+        titulo: it.titulo,
+        destino: it.destino,
+        tipo: it.tipo,
+        precio: it.precio,
+        fechaReserva,
+        fechaViaje,
+        personas
+      };
+
+      actuales.push(reserva);
+      saveReservasForUser(email, actuales);
+
+      closeReservaForm();
+      renderReservasModal();
+      alert('Reserva guardada en "Mis reservas" en este dispositivo.');
+    }
+
+    function cancelarReserva(id){
+      const user = getUser();
+      if(!user) return;
+      const email = user.email;
+      let reservas = getReservasForUser(email);
+      reservas = reservas.filter(r=> String(r.id) !== String(id));
+      saveReservasForUser(email, reservas);
+      renderReservasModal();
+    }
+
+    function renderReservasModal(){
+      const listEl = document.getElementById('reservasList');
+      const msgEl = document.getElementById('reservasMsg');
+      if(!listEl || !msgEl) return;
+
+      listEl.innerHTML='';
+      const user = getUser();
+      if(!user){
+        msgEl.textContent='Inicia sesión para ver tus reservas.';
+        return;
+      }
+
+      const reservas = getReservasForUser(user.email);
+      if(!reservas.length){
+        msgEl.textContent='Aún no has reservado actividades ni hospedajes.';
+        return;
+      }
+
+      msgEl.textContent=`Tienes ${reservas.length} reserva(s) guardada(s) en este dispositivo.`;
+      reservas.forEach(r=>{
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <span class="pill">${r.tipo || 'Experiencia'}</span>
+          <h3 style="margin:6px 0 4px">${r.titulo}</h3>
+          <p class="muted" style="margin:0">${r.destino}</p>
+          <p style="margin:6px 0 0"><strong>${r.precio || ''}</strong></p>
+          <p class="muted" style="margin:4px 0 0">Viaje: ${r.fechaViaje || 'Sin fecha'}</p>
+          <p class="muted" style="margin:2px 0 0">Personas: ${r.personas || 1}</p>
+          <p class="muted" style="margin:2px 0 0">Reservado el ${r.fechaReserva || ''}</p>
+          <div style="margin-top:8px">
+            <button class="btn" type="button" data-cancel-id="${r.id}">Cancelar reserva</button>
+          </div>
+        `;
+        listEl.appendChild(card);
+      });
+
+      // Listeners para cancelar
+      listEl.querySelectorAll('[data-cancel-id]').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const id = btn.getAttribute('data-cancel-id');
+          cancelarReserva(id);
+        });
+      });
+    }
+
+    function openReservasModal(){
+      const m = document.getElementById('reservasModal');
+      if(!m) return;
+      renderReservasModal();
+      m.style.display='flex';
+    }
+
+    function closeReservasModal(){
+      const m = document.getElementById('reservasModal');
+      if(m) m.style.display='none';
+    }
+
+    window.addEventListener('DOMContentLoaded', ()=>{
+      document.getElementById('reservasModal')?.addEventListener('click', e=>{
+        if(e.target.id==='reservasModal') closeReservasModal();
+      });
+      document.getElementById('reservasClose')?.addEventListener('click', closeReservasModal);
+
+      document.getElementById('reservaFormModal')?.addEventListener('click', e=>{
+        if(e.target.id==='reservaFormModal') closeReservaForm();
+      });
+      document.getElementById('reservaFormClose')?.addEventListener('click', closeReservaForm);
+    });
+
+    // Calculadora
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const EF={transport:{avion:0.15,bus:0.03,carro:0.12,tren:0.04},lodge:{hotel:15,hostal:6,airbnb:10,camping:1},activity:{baja:1,media:5,alta:12}};
+      const fmt = x=> new Intl.NumberFormat('es-CO',{maximumFractionDigits:1}).format(x);
+      const el = id=> document.getElementById(id);
+      const tm=el('tm'), km=el('km'), roundtrip=el('roundtrip'), occ=el('occ'), occWrap=el('occWrap');
+      const lodge=el('lodge'), nights=el('nights'), actlvl=el('actlvl'), days=el('days');
+      const totalLine=el('totalLine'), breakdown=el('breakdown'), equivs=el('equivs'), tips=el('tips');
+
+      function toggleOcc(){ occWrap.style.display = tm.value==='carro' ? 'block' : 'none'; }
+      tm.addEventListener('change', toggleOcc); toggleOcc();
+
+      function calc(){
+        const mode = tm.value;
+        let distance = Math.max(0, Number(km.value||0));
+        if(roundtrip.checked) distance *= 2;
+        const people = Math.max(1, Number(occ.value||1));
+        const nightsN = Math.max(0, Number(nights.value||0));
+        const daysN = Math.max(0, Number(days.value||0));
+
+        const tT = (distance * (EF.transport[mode]||0)) / (mode==='carro'?people:1);
+        const tL = nightsN * (EF.lodge[lodge.value]||0);
+        const tA = daysN * (EF.activity[actlvl.value]||0);
+        const total = tT + tL + tA;
+
+        totalLine.textContent = `Huella total estimada: ${fmt(total)} kg CO₂e por persona`;
+        breakdown.innerHTML = `
+          <li>Transporte: ${fmt(tT)} kg</li>
+          <li>Alojamiento: ${fmt(tL)} kg</li>
+          <li>Actividades: ${fmt(tA)} kg</li>`;
+
+        const eq_km_car = EF.transport.carro>0 ? total/EF.transport.carro : 0;
+        const eq_arboles = total>0 ? total/21 : 0;
+        equivs.textContent = `≈ recorrer ${fmt(eq_km_car)} km en carro o la captura anual de ~${fmt(eq_arboles)} árboles.`;
+
+        const recs = [];
+        if(mode==='avion' && distance>700) recs.push('Para tramos < 700 km considera tren/bus.');
+        if(mode==='carro' && people<3) recs.push('Comparte el trayecto para dividir la huella.');
+        if(lodge.value==='hotel' && nightsN>2) recs.push('Busca hotel con certificación o alterna con hostal/apartamento.');
+        if(actlvl.value==='alta') recs.push('Reduce actividades intensivas en energía/combustible.');
+        if(total>200) recs.push('Considera compensar parte de tu huella con proyectos confiables.');
+        tips.innerHTML = recs.length ? recs.map(r=>`<div class="step">${r}</div>`).join('') : '<div class="step">Buen perfil: tu plan ya luce responsable.</div>';
+      }
+
+      [tm, km, roundtrip, occ, lodge, nights, actlvl, days].forEach(c=> c.addEventListener('input', calc));
+
+      el('resetBtn').addEventListener('click', ()=>{
+        km.value=800; roundtrip.checked=true; occ.value=1; tm.value='avion'; lodge.value='hotel'; nights.value=3; actlvl.value='baja'; days.value=3; toggleOcc(); calc();
+      });
+
+      calc();
+    });
+  </script>
+</body>
+</html>
